@@ -1,0 +1,12 @@
+{
+  "name": "firebase-helloworld",
+  "version": "1.0.0",
+  "description": "",
+  "main": "firebase.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Remi Desreumaux <remi.desreumaux@gmail.com> (@remsdenyc)",
+  "license": "MIT",
+  "scripts" : { "start" : "node server.js" } 
+}

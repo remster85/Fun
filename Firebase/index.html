@@ -1,0 +1,37 @@
+<html>
+<head>
+        <!--
+          +1 with firebase. now you just need to write a node app with regression logic
+          that listens to each new vote on each post and tracks value history to ignore and reset
+          any malicious db.set(0)'s people run in console when they find this completely 
+          public script on your site. (Firebase is working on their security).
+          https://www.firebase.com/docs/
+          https://twitter.com/Stammy/status/272576842345615360
+        -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type='text/javascript' src='https://static.firebase.com/v0/firebase.js'></script>
+	<script type="text/javascript">
+		var post = "some-post-slug";
+		var db = new Firebase('https://remster-d970e.firebaseio.com/'+ post);
+		$(document).ready(function(){
+			db.on('value',function(s){
+				$('#votes').html(s.val());
+			});
+			$('#reset').on('click',function(){
+				db.set(0);
+			});
+			$('#add').on('click',function(){
+				db.transaction(
+					function(votes) { return votes + 1; },
+					function(success, data) { console.log(success); }
+				);
+			});
+		});
+	</script>
+</head>
+<body>
+	<span id="votes"></span><br><br>
+	<a href="javascript:void(0)" id="add">add</a><br/>
+	<a href="javascript:void(0)" id="reset">reset</a>
+</body>
+</html>
