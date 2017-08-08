@@ -9,8 +9,12 @@
   "keywords": [],
   "author": "Remi Desreumaux <remi.desreumaux@gmail.com> (@remsdenyc)",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.16.2",
+    "vue-axios": "^2.0.2"
+  },
   "devDependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "xmlhttprequest": "^1.2.2"
   }
 }

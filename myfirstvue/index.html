@@ -11,24 +11,48 @@
             <div id="remivue">
                 <h2>{{ appName }}</h2> 
                  <ul>
-                    <li v-for="page in pages">{{page.title}}</li>
+                    <li v-for="result in results">{{result.id}}</li>
                 </ul>
             </div>
         </div>       
         <script src="https://unpkg.com/vue@2.2.5/dist/vue.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script type="text/javascript">
             var remivue = new Vue({
                 el: '#remivue',
                 data: {
-                    appName: 'RemiVue',
-                    pages: [{
-                    "userId": 1,
-                    "id": 1,
-                    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-                    } ]
-                }
-            });        
+                    appName: 'RemiFirstVue',
+                    results: [{
+                                "id": "SRFD_01",
+                                "libelle": "DAAF SFD GUADELOUPE",
+                                "adresse": "Saint-Phy",
+                                "codePostal": "97100",
+                                "bp": "BP 651",
+                                "commune": "BASSE TERRE",
+                                "telephone": "0590990907",
+                                "email": "sfd.guadeloupe@educagri.fr",
+                                "fax": "0590990910",
+                                "departements": [
+                                  "971"
+                                ]
+                              }]
+                },
+                created : function(){
+                        console.log('created');
+                        axios.get('https://ensagri.agriculture.gouv.fr/arpent-resultats-api/api/arpent-resultats/autorites-academiques')
+                          .then(function (response) {
+                            console.log(response);
+                            self.remivue.results = response.data;
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
+
+                    },
+                });        
+
+
+
         </script>
     </body>
 </html>
